@@ -1,0 +1,29 @@
+.container {
+  min-width: 320px;
+  height: 100vh;
+  background: url(../images/bg.png);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+/* .box {
+  overflow: hidden;
+  position: relative;
+  margin: 0.25em auto;
+  max-width: 15em;
+  min-height: 10em;
+  border-radius: 1em;
+}
+
+.box:before {
+  position: absolute;
+  margin: -28.29px;
+  padding: 28.29px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 300px rgba(#95a, 0.75);
+  content: '';
+} */

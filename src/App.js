@@ -1,5 +1,7 @@
+import { Container } from './components/Container'
+
 function App() {
-  return <div>Its alive!</div>
+  return <Container />
 }
 
 export default App
