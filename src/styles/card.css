@@ -1,8 +1,7 @@
 .card {
   width: 320px;
   height: 509px;
-  /*position: relative;
-   overflow: hidden; */
+  position: relative;
 }
 
 .card__box {
@@ -17,6 +16,7 @@
   font-size: 13px;
   line-height: 15px;
   text-align: center;
+  color: #ffffff;
 }
 
 .card__caption-link {
@@ -29,24 +29,40 @@
   color: #1698d9;
 }
 
+.card__content {
+  display: flex;
+  flex-direction: column;
+  padding: 21px 0 0 48px;
+}
 
+.card__content-title {
+  padding: 0 0 5px 2px;
+  line-height: 19px;
+  color: #666666;
+}
 
+.card__content-name {
+  font-size: 48px;
+  line-height: 56px;
+}
 
+.card__content-taste {
+  font-size: 24px;
+  line-height: 28px;
+  padding: 0 0 15px 2px;
+}
 
-/* .card::before {
-  box-sizing: content-box;
-  width: 52.57px;
-  height: 56.57px;
-  content: '';
-  background-color: lightgrey;
-  border-right: 4px solid #1698d9;
-  position: absolute;
-  transform: rotate(50deg);
-  top: -29px;
-  left: -22.5px;
-} 
+.card__content-amount,
+.card__content-bonus,
+.card__content-result {
+  padding-left: 2px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #666666;
+}
 
-.card::before {
+/*.card::before {
   position: absolute;
   transform: rotate(50deg);
   margin: -28.29px;

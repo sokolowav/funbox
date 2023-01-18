@@ -1,0 +1,32 @@
+export let data = [
+  {
+    id: 1,
+    taste: 'с фуа-гра',
+    available: true,
+    amount: '10 порций',
+    bonus: 'мышь в подарок',
+    result: '',
+    weight: 0.5,
+    description: 'Печень утки разварная с артишоками.',
+  },
+  {
+    id: 2,
+    taste: 'с рыбой',
+    available: true,
+    amount: '40 порций',
+    bonus: '2 мыши в подарок',
+    result: '',
+    weight: 2,
+    description: 'Головы щучьи с чесноком да свежайшая сёмгушка.',
+  },
+  {
+    id: 3,
+    taste: 'с курой',
+    available: false,
+    amount: '100 порций',
+    bonus: '5 мышей в подарок',
+    result: 'заказчик доволен',
+    weight: 5,
+    description: 'Филе из цыплят с трюфелями в бульоне.',
+  },
+]
