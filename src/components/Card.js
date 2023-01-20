@@ -1,7 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export const Card = (props) => {
   const [isChecked, setIsChecked] = useState(false)
+  const currentCard = useRef()
+
+  useEffect(() => {
+    const card = currentCard.current
+    const oval = card.querySelector('.card__oval')
+
+    const hoverHandler = (e) => {
+      if (card.classList.contains('card__box_default')) {
+        card.classList.toggle('card__box_default_hover')
+        oval.classList.toggle('card__oval_default_hover')
+      }
+    }
+
+    card.addEventListener('mouseenter', hoverHandler)
+    card.addEventListener('mouseleave', hoverHandler)
+
+    return () => {
+      card.removeEventListener('mouseenter', hoverHandler)
+      card.removeEventListener('mouseleave', hoverHandler)
+    }
+  }, [])
 
   const isCheckedHandler = (e) => {
     const card = e.target.closest('.card')
@@ -11,15 +32,18 @@ export const Card = (props) => {
 
     setIsChecked(!isChecked)
     cardBox.classList.toggle('card__box_checked')
+    cardBox.classList.toggle('card__box_default')
     oval.classList.toggle('card__oval_checked')
+    oval.classList.toggle('card__oval_default')
   }
 
   return (
     <div className='card'>
       <div
+        ref={currentCard}
         className={
-          'card__box' +
-          (props.product.available ? '' : ' card__box_unavaliable')
+          'card__box card__box_' +
+          (props.product.available ? 'default' : 'unavaliable')
         }
         onClick={isCheckedHandler}
       >
@@ -31,7 +55,7 @@ export const Card = (props) => {
           <span className='card__content-bonus'>{props.product.bonus}</span>
           <span className='card__content-result'>{props.product.result}</span>
         </div>
-        <div className='card__oval'>
+        <div className='card__oval card__oval_default'>
           <span className='card__content-weight'>{props.product.weight}</span>
           <span className='card__content-unit'>кг</span>
         </div>

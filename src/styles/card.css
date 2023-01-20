@@ -1,36 +1,44 @@
 .card {
+  overflow: hidden;
   width: 320px;
   height: 509px;
-  position: relative;
-  overflow: hidden;
 }
 
 .card__box {
-  height: 480px;
-  border-radius: 12px;
-  border: 4px solid #1698d9;
+  position: relative;
   margin-bottom: 14px;
+
+  border-radius: 12px;
+  border: 4px solid;
+
+  height: 480px;
   background: url(../images/cat.png) no-repeat 60% 180% white;
+}
+
+.card__box_default {
+  border-color: #1698d9;
+}
+
+.card__box_default_hover {
+  border-color: #2ea8e6;
 }
 
 .card__box_checked {
   border-color: #d91667;
 }
 
-.card__box_unavaliable {
-  border-color: black;
-}
-
 .card__caption {
+  text-align: center;
+
   font-size: 13px;
   line-height: 15px;
-  text-align: center;
   color: #ffffff;
 }
 
 .card__caption-link {
-  color: #1698d9;
   border-bottom: 1.5px dashed #1698d9;
+
+  color: #1698d9;
   cursor: pointer;
 }
 
@@ -39,13 +47,15 @@
 }
 
 .card__content {
+  padding: 21px 0 0 48px;
+
   display: flex;
   flex-direction: column;
-  padding: 21px 0 0 48px;
 }
 
 .card__content-title {
   padding: 0 0 5px 2px;
+
   line-height: 19px;
   color: #666666;
 }
@@ -56,15 +66,17 @@
 }
 
 .card__content-taste {
+  padding: 0 0 15px 2px;
+
   font-size: 24px;
   line-height: 28px;
-  padding: 0 0 15px 2px;
 }
 
 .card__content-amount,
 .card__content-bonus,
 .card__content-result {
   padding-left: 2px;
+
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
@@ -74,16 +86,24 @@
 .card__oval {
   position: absolute;
   left: 70%;
-  top: 75.44%;
+  top: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
+  border-radius: 50%;
+
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+}
+
+.card__oval_default {
   background-color: #1698d9;
+}
+
+.card__oval_default_hover {
+  background-color: #2ea8e6;
 }
 
 .card__oval_checked {
@@ -92,16 +112,34 @@
 
 .card__content-weight {
   padding-top: 13px;
+
   font-size: 42px;
   line-height: 22px;
   color: #ffffff;
 }
 .card__content-unit {
   padding-top: 7px;
+
   font-size: 21px;
   line-height: 22px;
   color: #ffffff;
 }
+
+/*.card__box_unavaliable:after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: rgba(100, 100, 100, 0.756);
+  z-index: 2;
+  border-radius: 12px;
+}
+
+ .card__box_unavaliable {
+  opacity: 0.49988678;
+} */
 
 /* .card::before {
   position: absolute;
