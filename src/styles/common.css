@@ -6,6 +6,5 @@
 
 body {
   font-family: 'Trebuchet MS', sans-serif;
-  width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }

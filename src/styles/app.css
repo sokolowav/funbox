@@ -2,5 +2,7 @@
 @import './fonts.css';
 @import './common.css';
 
-@import './card.css';
 @import './container.css';
+@import './heading.css';
+@import './card-board.css';
+@import './card.css';

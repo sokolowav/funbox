@@ -1,34 +1,6 @@
 .container {
   height: 100vh;
+  min-height: 650px;
   background: url(../images/bg.png);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 32px 0;
 }
-
-.container__heading {
-  font-family: 'Exo-light';
-  font-size: 36px;
-  line-height: 42px;
-  text-align: center;
-  color: #ffffff;
-  text-shadow: 0px 1px 1px #000000;
-}
-
-/* .box {
-  overflow: hidden;
-  position: relative;
-  margin: 0.25em auto;
-  max-width: 15em;
-  min-height: 10em;
-  border-radius: 1em;
-}
-
-.box:before {
-  position: absolute;
-  margin: -28.29px;
-  padding: 28.29px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 300px rgba(#95a, 0.75);
-  content: '';
-} */

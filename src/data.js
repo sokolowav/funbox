@@ -6,7 +6,7 @@ export let data = [
     amount: '10 порций',
     bonus: 'мышь в подарок',
     result: '',
-    weight: 0.5,
+    weight: '0,5',
     description: 'Печень утки разварная с артишоками.',
   },
   {

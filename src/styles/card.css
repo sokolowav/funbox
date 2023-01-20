@@ -2,6 +2,7 @@
   width: 320px;
   height: 509px;
   position: relative;
+  overflow: hidden;
 }
 
 .card__box {
@@ -62,7 +63,35 @@
   color: #666666;
 }
 
-/*.card::before {
+.card__oval {
+  position: absolute;
+  left: 70%;
+  top: 75.44%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #1698d9;
+}
+
+.card__content-weight {
+  padding-top: 13px;
+  font-size: 42px;
+  line-height: 22px;
+  color: #ffffff;
+}
+.card__content-unit {
+  padding-top: 7px;
+  font-size: 21px;
+  line-height: 22px;
+  color: #ffffff;
+}
+
+/* .card::before {
   position: absolute;
   transform: rotate(50deg);
   margin: -28.29px;
