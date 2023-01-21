@@ -19,12 +19,12 @@ export const Card = (props) => {
           card.classList.add('card__box_checked_hover')
           oval.classList.add('card__oval_checked_hover')
           title.textContent = 'Котэ не одобряет?'
-          title.classList.add('card__content-title_hover')
+          title.classList.add('card__content-title_checked_hover')
         } else {
           card.classList.remove('card__box_checked_hover')
           oval.classList.remove('card__oval_checked_hover')
           title.textContent = props.product.title
-          title.classList.remove('card__content-title_hover')
+          title.classList.remove('card__content-title_checked_hover')
         }
       }
     }
@@ -53,41 +53,64 @@ export const Card = (props) => {
     oval.classList.remove('card__oval_checked_hover')
     oval.classList.toggle('card__oval_default')
     title.textContent = props.product.title
-    title.classList.remove('card__content-title_hover')
+    title.classList.remove('card__content-title_checked_hover')
+  }
+
+  const determineClass = (str) => {
+    return (
+      str + ' ' + str + (props.product.available ? '_default' : '_unavailable')
+    )
   }
 
   return (
     <div className='card'>
       <div
         ref={currentCard}
-        className={
-          'card__box card__box_' +
-          (props.product.available ? 'default' : 'unavailable')
-        }
+        className={determineClass('card__box')}
         onClick={isCheckedHandler}
       >
         <div className='card__content'>
-          <span className='card__content-title'>{props.product.title}</span>
-          <h1 className='card__content-name'>{props.product.name}</h1>
-          <h1 className='card__content-taste'>{props.product.taste}</h1>
-          <span className='card__content-amount'>{props.product.amount}</span>
-          <span className='card__content-bonus'>{props.product.bonus}</span>
-          <span className='card__content-result'>{props.product.result}</span>
+          <span className={determineClass('card__content-title')}>
+            {props.product.title}
+          </span>
+          <h1 className={determineClass('card__content-name')}>
+            {props.product.name}
+          </h1>
+          <h1 className={determineClass('card__content-taste')}>
+            {props.product.taste}
+          </h1>
+          <span className={determineClass('card__content-amount')}>
+            {props.product.amount}
+          </span>
+          <span className={determineClass('card__content-bonus')}>
+            {props.product.bonus}
+          </span>
+          <span className={determineClass('card__content-result')}>
+            {props.product.result}
+          </span>
         </div>
-        <div className='card__oval card__oval_default'>
+        <div className={determineClass('card__oval')}>
           <span className='card__content-weight'>{props.product.weight}</span>
           <span className='card__content-unit'>кг</span>
         </div>
       </div>
-      {isChecked ? (
-        <div className='card__caption'>{props.product.description}</div>
+      {props.product.available ? (
+        isChecked ? (
+          <div className={determineClass('card__caption')}>
+            {props.product.description}
+          </div>
+        ) : (
+          <div className={determineClass('card__caption')}>
+            Чего сидишь? Порадуй котэ,{' '}
+            <span className='card__caption-link' onClick={isCheckedHandler}>
+              купи
+            </span>
+            <span className='card__caption-dot'>.</span>
+          </div>
+        )
       ) : (
-        <div className='card__caption'>
-          Чего сидишь? Порадуй котэ,{' '}
-          <span className='card__caption-link' onClick={isCheckedHandler}>
-            купи
-          </span>
-          <span className='card__caption-dot'>.</span>
+        <div className={determineClass('card__caption')}>
+          Печалька, {props.product.taste} закончился.
         </div>
       )}
     </div>

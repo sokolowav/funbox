@@ -20,7 +20,7 @@ export let data = [
     amount: '40 порций',
     bonus: '2 мыши в подарок',
     result: '',
-    weight: 2,
+    weight: '2',
     description: 'Головы щучьи с чесноком да свежайшая сёмгушка.',
   },
   {
@@ -32,7 +32,7 @@ export let data = [
     amount: '100 порций',
     bonus: '5 мышей в подарок',
     result: 'заказчик доволен',
-    weight: 5,
+    weight: '5',
     description: 'Филе из цыплят с трюфелями в бульоне.',
   },
 ]
