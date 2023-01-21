@@ -23,21 +23,21 @@
   border-color: #1698d9;
 }
 
+.card__box-upper-part_default_hover {
+  border-color: #2ea8e6;
+}
+
 .card__box-upper-part_checked {
   border-color: #d91667;
+}
+
+.card__box-upper-part_checked_hover {
+  border-color: #e52e7a;
 }
 
 .card__box-upper-part_unavailable {
   border-color: #d3d3d3;
   background-color: #f9f9f9;
-}
-
-.card__box-upper-part_default_hover {
-  border-color: #2ea8e6;
-}
-
-.card__box-upper-part_checked_hover {
-  border-color: #e52e7a;
 }
 
 .card__box-upper-part_default::before {
@@ -68,6 +68,26 @@
   border: 22px solid transparent;
   border-right: 22px solid #d3d3d3;
   border-bottom: 22px solid #d3d3d3;
+}
+
+.card__box-upper-part_default_hover::before {
+  position: absolute;
+  top: -4.075px;
+  left: -43px;
+  content: '';
+  border: 22px solid transparent;
+  border-right: 22px solid #2ea8e6;
+  border-bottom: 22px solid #2ea8e6;
+}
+
+.card__box-upper-part_checked_hover::before {
+  position: absolute;
+  top: -4.075px;
+  left: -43px;
+  content: '';
+  border: 22px solid transparent;
+  border-right: 22px solid #e52e7a;
+  border-bottom: 22px solid #e52e7a;
 }
 
 .card__box-upper-part_default::after,
