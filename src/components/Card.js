@@ -5,17 +5,15 @@ export const Card = (props) => {
   const currentCard = useRef()
 
   useEffect(() => {
-    const cardLowerPart = currentCard.current.querySelector(
-      '.card__box-lower-part'
-    )
-    const cardUpperPart = currentCard.current.querySelector(
-      '.card__box-upper-part'
-    )
+    const card = currentCard.current
+    const cardLowerPart = card.querySelector('.card__box-lower-part')
+    const cardUpperPart = card.querySelector('.card__box-upper-part')
     const oval = cardLowerPart.querySelector('.card__oval')
-    const title = cardLowerPart.querySelector('.card__content-title')
+    const title = cardUpperPart.querySelector('.card__content-title')
 
     const hoverHandler = (e) => {
       if (!props.product.available) return
+      console.log(e.target, e.relatedTarget)
       if (!isChecked) {
         cardUpperPart.classList.toggle('card__box-upper-part_default_hover')
         cardLowerPart.classList.toggle('card__box-lower-part_default_hover')
@@ -37,16 +35,16 @@ export const Card = (props) => {
       }
     }
 
-    cardUpperPart.addEventListener('mouseenter', hoverHandler)
-    cardUpperPart.addEventListener('mouseleave', hoverHandler)
-    cardLowerPart.addEventListener('mouseenter', hoverHandler)
-    cardLowerPart.addEventListener('mouseleave', hoverHandler)
+    card.addEventListener('mouseenter', hoverHandler)
+    card.addEventListener('mouseleave', hoverHandler)
+    /* cardLowerPart.addEventListener('mouseenter', hoverHandler)
+    cardLowerPart.addEventListener('mouseleave', hoverHandler) */
 
     return () => {
-      cardUpperPart.removeEventListener('mouseenter', hoverHandler)
-      cardUpperPart.removeEventListener('mouseleave', hoverHandler)
-      cardLowerPart.removeEventListener('mouseenter', hoverHandler)
-      cardLowerPart.removeEventListener('mouseleave', hoverHandler)
+      card.removeEventListener('mouseenter', hoverHandler)
+      card.removeEventListener('mouseleave', hoverHandler)
+      /* cardLowerPart.removeEventListener('mouseenter', hoverHandler)
+      cardLowerPart.removeEventListener('mouseleave', hoverHandler) */
     }
   }, [isChecked, props.product.title, props.product.available])
 
@@ -59,7 +57,7 @@ export const Card = (props) => {
       '.card__box-upper-part'
     )
     const oval = cardLowerPart.querySelector('.card__oval')
-    const title = cardLowerPart.querySelector('.card__content-title')
+    const title = cardUpperPart.querySelector('.card__content-title')
 
     setIsChecked(!isChecked)
     cardLowerPart.classList.toggle('card__box-lower-part_checked')
@@ -86,12 +84,13 @@ export const Card = (props) => {
   return (
     <div className='card'>
       <div className='card__box' onClick={isCheckedHandler} ref={currentCard}>
-        <div className={determineClass('card__box-upper-part')}></div>
+        <div className={determineClass('card__box-upper-part')}>
+          <span className={determineClass('card__content-title')}>
+            {props.product.title}
+          </span>
+        </div>
         <div className={determineClass('card__box-lower-part')}>
           <div className='card__content'>
-            <span className={determineClass('card__content-title')}>
-              {props.product.title}
-            </span>
             <h1 className={determineClass('card__content-name')}>
               {props.product.name}
             </h1>
