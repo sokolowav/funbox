@@ -121,7 +121,7 @@
   border-bottom-right-radius: 12px;
 
   height: 438px;
-  background: url(../images/cat.png) no-repeat 60% 180% white;
+  background: url(../images/cat.png) no-repeat 55% 221% white;
 }
 
 .card__box-lower-part_default {
@@ -161,17 +161,16 @@
 }
 
 .card__content {
-  padding: 9px 0 0 45px;
+  padding: 4px 0 0 45px;
 
   display: flex;
   flex-direction: column;
 }
 
 .card__content-title {
-  padding: 0 0 5px 2px;
   position: absolute;
   top: 17px;
-  left: 7px;
+  left: 9px;
 
   line-height: 19px;
 }
@@ -195,7 +194,7 @@
 }
 
 .card__content-taste {
-  padding: 0 0 15px 2px;
+  padding: 0 0 12px 2px;
 
   font-size: 24px;
   line-height: 28px;

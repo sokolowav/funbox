@@ -13,7 +13,6 @@ export const Card = (props) => {
 
     const hoverHandler = (e) => {
       if (!props.product.available) return
-      console.log(e.target, e.relatedTarget)
       if (!isChecked) {
         cardUpperPart.classList.toggle('card__box-upper-part_default_hover')
         cardLowerPart.classList.toggle('card__box-lower-part_default_hover')
@@ -37,14 +36,10 @@ export const Card = (props) => {
 
     card.addEventListener('mouseenter', hoverHandler)
     card.addEventListener('mouseleave', hoverHandler)
-    /* cardLowerPart.addEventListener('mouseenter', hoverHandler)
-    cardLowerPart.addEventListener('mouseleave', hoverHandler) */
 
     return () => {
       card.removeEventListener('mouseenter', hoverHandler)
       card.removeEventListener('mouseleave', hoverHandler)
-      /* cardLowerPart.removeEventListener('mouseenter', hoverHandler)
-      cardLowerPart.removeEventListener('mouseleave', hoverHandler) */
     }
   }, [isChecked, props.product.title, props.product.available])
 
@@ -75,11 +70,8 @@ export const Card = (props) => {
     title.classList.remove('card__content-title_checked_hover')
   }
 
-  const determineClass = (str) => {
-    return (
-      str + ' ' + str + (props.product.available ? '_default' : '_unavailable')
-    )
-  }
+  const determineClass = (str) =>
+    str + ' ' + str + (props.product.available ? '_default' : '_unavailable')
 
   return (
     <div className='card'>
