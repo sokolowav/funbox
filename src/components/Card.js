@@ -104,26 +104,26 @@ export const Card = (props) => {
             <span className='card__content-unit'>кг</span>
           </div>
         </div>
-        {props.product.available ? (
-          isChecked ? (
-            <div className={determineClass('card__caption')}>
-              {props.product.description}
-            </div>
-          ) : (
-            <div className={determineClass('card__caption')}>
-              Чего сидишь? Порадуй котэ,{' '}
-              <span className='card__caption-link' onClick={isCheckedHandler}>
-                купи
-              </span>
-              <span className='card__caption-dot'>.</span>
-            </div>
-          )
+      </div>
+      {props.product.available ? (
+        isChecked ? (
+          <div className={determineClass('card__caption')}>
+            {props.product.description}
+          </div>
         ) : (
           <div className={determineClass('card__caption')}>
-            Печалька, {props.product.taste} закончился.
+            Чего сидишь? Порадуй котэ,{' '}
+            <span className='card__caption-link' onClick={isCheckedHandler}>
+              купи
+            </span>
+            <span className='card__caption-dot'>.</span>
           </div>
-        )}
-      </div>
+        )
+      ) : (
+        <div className={determineClass('card__caption')}>
+          Печалька, {props.product.taste} закончился.
+        </div>
+      )}
     </div>
   )
 }
