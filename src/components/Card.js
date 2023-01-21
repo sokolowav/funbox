@@ -10,6 +10,7 @@ export const Card = (props) => {
     const title = card.querySelector('.card__content-title')
 
     const hoverHandler = (e) => {
+      if (!props.product.available) return
       if (!isChecked) {
         card.classList.toggle('card__box_default_hover')
         oval.classList.toggle('card__oval_default_hover')
@@ -35,14 +36,14 @@ export const Card = (props) => {
       card.removeEventListener('mouseenter', hoverHandler)
       card.removeEventListener('mouseleave', hoverHandler)
     }
-  }, [isChecked, props.product.title])
+  }, [isChecked, props.product.title, props.product.available])
 
   const isCheckedHandler = (e) => {
     const card = currentCard.current
     const oval = card.querySelector('.card__oval')
     const title = card.querySelector('.card__content-title')
 
-    if (card.classList.contains('card__box_unavaliable')) return
+    if (!props.product.available) return
 
     setIsChecked(!isChecked)
     card.classList.toggle('card__box_checked')
@@ -61,13 +62,13 @@ export const Card = (props) => {
         ref={currentCard}
         className={
           'card__box card__box_' +
-          (props.product.available ? 'default' : 'unavaliable')
+          (props.product.available ? 'default' : 'unavailable')
         }
         onClick={isCheckedHandler}
       >
         <div className='card__content'>
           <span className='card__content-title'>{props.product.title}</span>
-          <h1 className='card__content-name'>Нямушка</h1>
+          <h1 className='card__content-name'>{props.product.name}</h1>
           <h1 className='card__content-taste'>{props.product.taste}</h1>
           <span className='card__content-amount'>{props.product.amount}</span>
           <span className='card__content-bonus'>{props.product.bonus}</span>

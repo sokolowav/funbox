@@ -2,6 +2,7 @@ export let data = [
   {
     id: 1,
     title: 'Сказочное заморское яство',
+    name: 'Нямушка',
     taste: 'с фуа-гра',
     available: true,
     amount: '10 порций',
@@ -13,6 +14,7 @@ export let data = [
   {
     id: 2,
     title: 'Сказочное заморское яство',
+    name: 'Нямушка',
     taste: 'с рыбой',
     available: true,
     amount: '40 порций',
@@ -24,6 +26,7 @@ export let data = [
   {
     id: 3,
     title: 'Сказочное заморское яство',
+    name: 'Нямушка',
     taste: 'с курой',
     available: false,
     amount: '100 порций',
