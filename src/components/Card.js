@@ -7,11 +7,24 @@ export const Card = (props) => {
   useEffect(() => {
     const card = currentCard.current
     const oval = card.querySelector('.card__oval')
+    const title = card.querySelector('.card__content-title')
 
     const hoverHandler = (e) => {
-      if (card.classList.contains('card__box_default')) {
+      if (!isChecked) {
         card.classList.toggle('card__box_default_hover')
         oval.classList.toggle('card__oval_default_hover')
+      } else if (isChecked) {
+        if (e.type === 'mouseenter') {
+          card.classList.add('card__box_checked_hover')
+          oval.classList.add('card__oval_checked_hover')
+          title.textContent = 'Котэ не одобряет?'
+          title.classList.add('card__content-title_hover')
+        } else {
+          card.classList.remove('card__box_checked_hover')
+          oval.classList.remove('card__oval_checked_hover')
+          title.textContent = props.product.title
+          title.classList.remove('card__content-title_hover')
+        }
       }
     }
 
@@ -22,19 +35,24 @@ export const Card = (props) => {
       card.removeEventListener('mouseenter', hoverHandler)
       card.removeEventListener('mouseleave', hoverHandler)
     }
-  }, [])
+  }, [isChecked, props.product.title])
 
   const isCheckedHandler = (e) => {
-    const card = e.target.closest('.card')
-    const cardBox = card.querySelector('.card__box')
+    const card = currentCard.current
     const oval = card.querySelector('.card__oval')
-    if (cardBox.classList.contains('card__box_unavaliable')) return
+    const title = card.querySelector('.card__content-title')
+
+    if (card.classList.contains('card__box_unavaliable')) return
 
     setIsChecked(!isChecked)
-    cardBox.classList.toggle('card__box_checked')
-    cardBox.classList.toggle('card__box_default')
+    card.classList.toggle('card__box_checked')
+    card.classList.remove('card__box_checked_hover')
+    card.classList.toggle('card__box_default')
     oval.classList.toggle('card__oval_checked')
+    oval.classList.remove('card__oval_checked_hover')
     oval.classList.toggle('card__oval_default')
+    title.textContent = props.product.title
+    title.classList.remove('card__content-title_hover')
   }
 
   return (
@@ -48,7 +66,7 @@ export const Card = (props) => {
         onClick={isCheckedHandler}
       >
         <div className='card__content'>
-          <span className='card__content-title'>Сказочное заморское яство</span>
+          <span className='card__content-title'>{props.product.title}</span>
           <h1 className='card__content-name'>Нямушка</h1>
           <h1 className='card__content-taste'>{props.product.taste}</h1>
           <span className='card__content-amount'>{props.product.amount}</span>
