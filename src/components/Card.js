@@ -14,8 +14,13 @@ export const Card = (props) => {
     const hoverHandler = (e) => {
       if (!props.product.available) return
       if (!isChecked) {
-        border.classList.toggle('card__box-border_default_hover')
-        oval.classList.toggle('card__oval_default_hover')
+        if (e.type === 'mouseenter') {
+          border.classList.add('card__box-border_default_hover')
+          oval.classList.add('card__oval_default_hover')
+        } else {
+          border.classList.remove('card__box-border_default_hover')
+          oval.classList.remove('card__oval_default_hover')
+        }
       } else if (isChecked) {
         if (e.type === 'mouseenter') {
           border.classList.add('card__box-border_checked_hover')
@@ -48,17 +53,28 @@ export const Card = (props) => {
     const oval = card.querySelector('.card__oval')
     const title = card.querySelector('.card__content-title')
 
+    if (isChecked) {
+      border.classList.add('card__box-border_default_hover')
+      border.classList.remove('card__box-border_checked_hover')
+      border.classList.remove('card__box-border_checked')
+
+      oval.classList.add('card__oval_default')
+      oval.classList.remove('card__oval_checked')
+      oval.classList.remove('card__oval_checked_hover')
+
+      title.textContent = props.product.title
+      title.classList.remove('card__content-title_checked_hover')
+    } else {
+      border.classList.add('card__box-border_checked')
+      border.classList.remove('card__box-border_default_hover')
+      border.classList.remove('card__box-border_checked_hover')
+
+      oval.classList.add('card__oval_checked')
+      oval.classList.remove('card__oval_default')
+      oval.classList.remove('card__oval_checked_hover')
+    }
+
     setIsChecked(!isChecked)
-    border.classList.remove('card__box-border_checked_hover')
-    border.classList.remove('card__box-border_default_hover')
-    border.classList.toggle('card__box-border_checked')
-
-    oval.classList.toggle('card__oval_checked')
-    oval.classList.remove('card__oval_checked_hover')
-    oval.classList.toggle('card__oval_default')
-
-    title.textContent = props.product.title
-    title.classList.remove('card__content-title_checked_hover')
   }
 
   const determineClass = (str) =>
