@@ -1,12 +1,16 @@
 import React from 'react'
 import { data } from '../data'
-import { CardBoard } from './CardBoard'
+import { Card } from './Card'
 
 export const Container = () => {
   return (
     <div className='container'>
       <div className='heading'>Ты сегодня покормил кота?</div>
-      <CardBoard data={data} />
+      <div className='card-board'>
+        {data.map((product) => (
+          <Card key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   )
 }
