@@ -83,7 +83,7 @@ export const Card = (props) => {
   return (
     <div className='card' ref={currentCard}>
       <div className='card__box' onClick={isCheckedHandler}>
-        <Border available={props.product.available} />
+        <Border borderColor={determineClass('card__box-border')} />
         <div className={determineClass('card__content')}>
           <span className={determineClass('card__content-title')}>
             {props.product.title}
