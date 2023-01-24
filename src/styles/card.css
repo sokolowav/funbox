@@ -1,3 +1,15 @@
+:root {
+  --color_default: #1698d9;
+  --color_default_hover: #2ea8e6;
+  --color_checked: #d91667;
+  --color_checked_hover: #e62e7a;
+  --color_unavailable: #b3b3b3;
+  --color_text_light: #ffffff;
+  --color_text_dark: #666666;
+  --color_text_gold: #ffff66;
+  --color_text_unavailable: #d2d2d2;
+}
+
 .card {
   width: 320px;
   height: 509px;
@@ -9,23 +21,23 @@
 }
 
 .card__box-border_default {
-  fill: #1698d9;
+  fill: var(--color_default);
 }
 
 .card__box-border_default_hover {
-  fill: #2ea8e6;
+  fill: var(--color_default_hover);
 }
 
 .card__box-border_checked {
-  fill: #d91667;
+  fill: var(--color_checked);
 }
 
 .card__box-border_checked_hover {
-  fill: #e62e7a;
+  fill: var(--color_checked_hover);
 }
 
 .card__box-border_unavailable {
-  fill: #b3b3b3;
+  fill: var(--color_unavailable);
 }
 
 .card__content {
@@ -60,15 +72,15 @@
 
 .card__content-title_default,
 .card__content-title_checked {
-  color: #666666;
+  color: var(--color_text_dark);
 }
 
 .card__content-title_checked_hover {
-  color: #e62e7a;
+  color: var(--color_checked_hover);
 }
 
 .card__content-title_unavailable {
-  color: #d2d2d2;
+  color: var(--color_text_unavailable);
 }
 
 .card__content-name {
@@ -91,7 +103,7 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
-  color: #666666;
+  color: var(--color_text_dark);
 }
 
 .card__content-name_unavailable,
@@ -99,7 +111,7 @@
 .card__content-amount_unavailable,
 .card__content-bonus_unavailable,
 .card__content-result_unavailable {
-  color: #d2d2d2;
+  color: var(--color_text_unavailable);
 }
 
 .card__oval {
@@ -119,23 +131,23 @@
 }
 
 .card__oval_default {
-  background-color: #1698d9;
+  background-color: var(--color_default);
 }
 
 .card__oval_default_hover {
-  background-color: #2ea8e6;
+  background-color: var(--color_default_hover);
 }
 
 .card__oval_checked {
-  background-color: #d91667;
+  background-color: var(--color_checked);
 }
 
 .card__oval_checked_hover {
-  background-color: #e52e7a;
+  background-color: var(--color_checked_hover);
 }
 
 .card__oval_unavailable {
-  background-color: #b3b3b3;
+  background-color: var(--color_unavailable);
 }
 
 .card__content-weight {
@@ -143,14 +155,14 @@
 
   font-size: 42px;
   line-height: 22px;
-  color: #ffffff;
+  color: var(--color_text_light);
 }
 .card__content-unit {
   padding-top: 7px;
 
   font-size: 21px;
   line-height: 22px;
-  color: #ffffff;
+  color: var(--color_text_light);
 }
 
 .card__caption {
@@ -162,27 +174,35 @@
 }
 
 .card__caption_default {
-  color: #ffffff;
+  color: var(--color_text_light);
 }
 
 .card__caption_unavailable {
-  color: #ffff66;
+  color: var(--color_text_gold);
 }
 
 .card__caption-link {
-  border-bottom: 1.5px #1698d9;
-  border-bottom-style: dashed;
+  position: relative;
 
-  color: #1698d9;
+  color: var(--color_default);
   cursor: pointer;
 }
 
-.card__caption-link:hover {
-  border-color: #2ea8e6;
-
-  color: #2ea8e6;
+.card__caption-link_hover {
+  color: var(--color_default_hover);
 }
 
-.card__caption-dot {
-  color: #1698d9;
+.card__caption-link::after {
+  position: absolute;
+  content: '';
+  bottom: -1px;
+  left: 0;
+  width: 28px;
+  height: 1.5px;
+  border-bottom: 1.5px var(--color_default);
+  border-bottom-style: dashed;
+}
+
+.card__caption-link_hover::after {
+  border-color: var(--color_default_hover);
 }

@@ -1,77 +1,75 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Border } from './Border'
+import { classes } from '../classes'
 
 export const Card = (props) => {
   const [isChecked, setIsChecked] = useState(false)
   const currentCard = useRef()
 
   useEffect(() => {
+    if (!props.product.available) return
+
     const card = currentCard.current.querySelector('.card__box')
     const border = card.querySelector('.card__box-border')
     const oval = card.querySelector('.card__oval')
     const title = card.querySelector('.card__content-title')
+    const link = currentCard.current.querySelector('.card__caption-link')
 
     const hoverHandler = (e) => {
-      if (!props.product.available) return
       if (!isChecked) {
+        if (!link) return
         if (e.type === 'mouseenter') {
-          border.classList.add('card__box-border_default_hover')
-          oval.classList.add('card__oval_default_hover')
+          border.className.baseVal = classes.BORDER_DEFAULT_HOVER
+          oval.className = classes.OVAL_DEFAULT_HOVER
+          link.className = classes.LINK_DEFAULT_HOVER
         } else {
-          border.classList.remove('card__box-border_default_hover')
-          oval.classList.remove('card__oval_default_hover')
+          border.className.baseVal = classes.BORDER_DEFAULT
+          oval.className = classes.OVAL_DEFAULT
+          link.className = classes.LINK_DEFAULT
         }
       } else if (isChecked) {
         if (e.type === 'mouseenter') {
-          border.classList.add('card__box-border_checked_hover')
-          oval.classList.add('card__oval_checked_hover')
-          title.classList.add('card__content-title_checked_hover')
+          border.className.baseVal = classes.BORDER_CHECKED_HOVER
+          oval.className = classes.OVAL_CHECKED_HOVER
+          title.className = classes.TITLE_CHECKED_HOVER
           title.textContent = 'Котэ не одобряет?'
         } else {
-          border.classList.remove('card__box-border_checked_hover')
-          oval.classList.remove('card__oval_checked_hover')
+          border.className.baseVal = classes.BORDER_CHECKED
+          oval.className = classes.OVAL_CHECKED
+          title.className = classes.TITLE_CHECKED
           title.textContent = props.product.title
-          title.classList.remove('card__content-title_checked_hover')
         }
       }
     }
 
     card.addEventListener('mouseenter', hoverHandler)
     card.addEventListener('mouseleave', hoverHandler)
+    link?.addEventListener('mouseenter', hoverHandler)
+    link?.addEventListener('mouseleave', hoverHandler)
 
     return () => {
       card.removeEventListener('mouseenter', hoverHandler)
       card.removeEventListener('mouseleave', hoverHandler)
+      link?.removeEventListener('mouseenter', hoverHandler)
+      link?.removeEventListener('mouseleave', hoverHandler)
     }
   }, [isChecked, props.product.title, props.product.available])
 
   const isCheckedHandler = () => {
     if (!props.product.available) return
     const card = currentCard.current.querySelector('.card__box')
-
     const border = card.querySelector('.card__box-border')
     const oval = card.querySelector('.card__oval')
     const title = card.querySelector('.card__content-title')
 
     if (isChecked) {
-      border.classList.add('card__box-border_default_hover')
-      border.classList.remove('card__box-border_checked_hover')
-      border.classList.remove('card__box-border_checked')
-
-      oval.classList.add('card__oval_default')
-      oval.classList.remove('card__oval_checked')
-      oval.classList.remove('card__oval_checked_hover')
-
+      border.className.baseVal = classes.BORDER_DEFAULT_HOVER
+      oval.className = classes.OVAL_DEFAULT_HOVER
+      title.className = classes.TITLE_DEFAULT
       title.textContent = props.product.title
-      title.classList.remove('card__content-title_checked_hover')
     } else {
-      border.classList.add('card__box-border_checked')
-      border.classList.remove('card__box-border_default_hover')
-      border.classList.remove('card__box-border_checked_hover')
-
-      oval.classList.add('card__oval_checked')
-      oval.classList.remove('card__oval_default')
-      oval.classList.remove('card__oval_checked_hover')
+      border.className.baseVal = classes.BORDER_CHECKED
+      oval.className = classes.OVAL_CHECKED
     }
 
     setIsChecked(!isChecked)
@@ -109,25 +107,22 @@ export const Card = (props) => {
           <span className='card__content-unit'>кг</span>
         </div>
       </div>
-      {props.product.available ? (
-        isChecked ? (
-          <div className={determineClass('card__caption')}>
-            {props.product.description}
-          </div>
-        ) : (
-          <div className={determineClass('card__caption')}>
-            Чего сидишь? Порадуй котэ,{' '}
-            <span className='card__caption-link' onClick={isCheckedHandler}>
-              купи
+      <div className={determineClass('card__caption')}>
+        {props.product.available ? (
+          isChecked ? (
+            <span>{props.product.description}</span>
+          ) : (
+            <span>
+              Чего сидишь? Порадуй котэ,{' '}
+              <span className='card__caption-link' onClick={isCheckedHandler}>
+                купи.
+              </span>
             </span>
-            <span className='card__caption-dot'>.</span>
-          </div>
-        )
-      ) : (
-        <div className={determineClass('card__caption')}>
-          Печалька, {props.product.taste} закончился.
-        </div>
-      )}
+          )
+        ) : (
+          <span>Печалька, {props.product.taste} закончился.</span>
+        )}
+      </div>
     </div>
   )
 }
