@@ -56,7 +56,8 @@
   height: 476px;
 }
 
-.card__content_default {
+.card__content_default,
+.card__content_checked {
   background: url(../images/cat_default.png) -6px 0 no-repeat;
 }
 
@@ -173,7 +174,8 @@
   line-height: 15px;
 }
 
-.card__caption_default {
+.card__caption_default,
+.card__caption_checked {
   color: var(--color_text_light);
 }
 
@@ -188,7 +190,7 @@
   cursor: pointer;
 }
 
-.card__caption-link_hover {
+.card__caption-link_default_hover {
   color: var(--color_default_hover);
 }
 
@@ -203,6 +205,6 @@
   border-bottom-style: dashed;
 }
 
-.card__caption-link_hover::after {
+.card__caption-link_default_hover::after {
   border-color: var(--color_default_hover);
 }

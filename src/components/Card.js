@@ -1,91 +1,58 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Border } from './Border'
-import { classes } from '../classes'
 
 export const Card = (props) => {
   const [isChecked, setIsChecked] = useState(false)
-  const currentCard = useRef()
+  const [isHovered, setIsHovered] = useState(false)
+  const link = useRef()
 
-  useEffect(() => {
+  const isCheckedHandler = (e) => {
     if (!props.product.available) return
-
-    const card = currentCard.current.querySelector('.card__box')
-    const border = card.querySelector('.card__box-border')
-    const oval = card.querySelector('.card__oval')
-    const title = card.querySelector('.card__content-title')
-    const link = currentCard.current.querySelector('.card__caption-link')
-
-    const hoverHandler = (e) => {
-      if (!isChecked) {
-        if (!link) return
-        if (e.type === 'mouseenter') {
-          border.className.baseVal = classes.BORDER_DEFAULT_HOVER
-          oval.className = classes.OVAL_DEFAULT_HOVER
-          link.className = classes.LINK_DEFAULT_HOVER
-        } else {
-          border.className.baseVal = classes.BORDER_DEFAULT
-          oval.className = classes.OVAL_DEFAULT
-          link.className = classes.LINK_DEFAULT
-        }
-      } else if (isChecked) {
-        if (e.type === 'mouseenter') {
-          border.className.baseVal = classes.BORDER_CHECKED_HOVER
-          oval.className = classes.OVAL_CHECKED_HOVER
-          title.className = classes.TITLE_CHECKED_HOVER
-          title.textContent = 'Котэ не одобряет?'
-        } else {
-          border.className.baseVal = classes.BORDER_CHECKED
-          oval.className = classes.OVAL_CHECKED
-          title.className = classes.TITLE_CHECKED
-          title.textContent = props.product.title
-        }
-      }
+    if (e.target === link.current) {
+      setIsHovered(false)
+      setIsChecked(true)
+      return
     }
-
-    card.addEventListener('mouseenter', hoverHandler)
-    card.addEventListener('mouseleave', hoverHandler)
-    link?.addEventListener('mouseenter', hoverHandler)
-    link?.addEventListener('mouseleave', hoverHandler)
-
-    return () => {
-      card.removeEventListener('mouseenter', hoverHandler)
-      card.removeEventListener('mouseleave', hoverHandler)
-      link?.removeEventListener('mouseenter', hoverHandler)
-      link?.removeEventListener('mouseleave', hoverHandler)
-    }
-  }, [isChecked, props.product.title, props.product.available])
-
-  const isCheckedHandler = () => {
-    if (!props.product.available) return
-    const card = currentCard.current.querySelector('.card__box')
-    const border = card.querySelector('.card__box-border')
-    const oval = card.querySelector('.card__oval')
-    const title = card.querySelector('.card__content-title')
-
-    if (isChecked) {
-      border.className.baseVal = classes.BORDER_DEFAULT_HOVER
-      oval.className = classes.OVAL_DEFAULT_HOVER
-      title.className = classes.TITLE_DEFAULT
-      title.textContent = props.product.title
-    } else {
-      border.className.baseVal = classes.BORDER_CHECKED
-      oval.className = classes.OVAL_CHECKED
-    }
-
+    if (!isChecked) setIsHovered(false)
+    if (isChecked && !isHovered) setIsHovered(true)
     setIsChecked(!isChecked)
   }
 
-  const determineClass = (str) =>
-    `${str} ${str}${props.product.available ? '_default' : '_unavailable'}`
+  const isHoveredHandler = (e) => {
+    if (!props.product.available) return
+    e.type === 'mouseenter' ? setIsHovered(true) : setIsHovered(false)
+  }
+
+  const determineClass = (str) => {
+    if (!props.product.available) return `${str} ${str}_unavailable`
+    if (!isChecked && !isHovered) return `${str} ${str}_default`
+    if (!isChecked && isHovered)
+      return `${str} ${str}_default ${str}_default_hover`
+    if (isChecked && !isHovered) return `${str} ${str}_checked`
+    if (isChecked && isHovered)
+      return `${str} ${str}_checked ${str}_checked_hover`
+  }
 
   return (
-    <div className='card' ref={currentCard}>
-      <div className='card__box' onClick={isCheckedHandler}>
+    <div className='card'>
+      <div
+        className='card__box'
+        onClick={isCheckedHandler}
+        onMouseEnter={isHoveredHandler}
+        onMouseLeave={isHoveredHandler}
+      >
         <Border borderColor={determineClass('card__box-border')} />
         <div className={determineClass('card__content')}>
-          <span className={determineClass('card__content-title')}>
-            {props.product.title}
-          </span>
+          {isChecked && isHovered ? (
+            <span className={determineClass('card__content-title')}>
+              Котэ не одобряет?
+            </span>
+          ) : (
+            <span className={determineClass('card__content-title')}>
+              {props.product.title}
+            </span>
+          )}
+
           <h1 className={determineClass('card__content-name')}>
             {props.product.name}
           </h1>
@@ -114,7 +81,13 @@ export const Card = (props) => {
           ) : (
             <span>
               Чего сидишь? Порадуй котэ,{' '}
-              <span className='card__caption-link' onClick={isCheckedHandler}>
+              <span
+                className={determineClass('card__caption-link')}
+                ref={link}
+                onClick={isCheckedHandler}
+                onMouseEnter={isHoveredHandler}
+                onMouseLeave={isHoveredHandler}
+              >
                 купи.
               </span>
             </span>
