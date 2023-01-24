@@ -177,6 +177,12 @@
   cursor: pointer;
 }
 
+.card__caption-link:hover {
+  border-color: #2ea8e6;
+
+  color: #2ea8e6;
+}
+
 .card__caption-dot {
   color: #1698d9;
 }
